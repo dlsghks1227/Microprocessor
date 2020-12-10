@@ -9,11 +9,13 @@
 #ifndef __CTIMEMANAGER_H__
 #define __CTIMEMANAGER_H__
 
+#include <time.h>
 #include <stdlib.h>
 
 #include "../Lib/CLCD.h"
 #include "../Lib/CDelay.h"
 #include "../Lib/CBuzzer.h"
+#include "../Lib/CFND.h"
 
 #include "CStateBase.h"
 #include "CCurrentTime.h"
@@ -23,6 +25,7 @@
 #include "CAlarmCheck.h"
 #include "CStopwatch.h"
 #include "CRecordList.h"
+#include "CEnglishPrint.h"
 #include "CMenu.h"
 
 class CState

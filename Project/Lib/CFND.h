@@ -18,6 +18,8 @@ const char FND_TABLE[11] = { 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7
 class CFND
 {
 public:
+	static CFND& GetInstance() { return m_Instance; }
+
 	CFND();
 	~CFND();
 	
@@ -25,17 +27,20 @@ public:
 	void Init();
 
 	void Display();
+	void DisplaySplit(int d1, int d2, int d3, int d4);
 	
 	int  GetData()				{ return m_Data; }
 	void SetData(int index)		{ m_Data = index; }
 	
 private:
 	bool IsValid(int data);
-	void DisplaySplit(int d1, int d2, int d3, int d4);
 	
 private:
 	CDelay	m_Delay;
 	int		m_Data;
+	
+private:
+	static CFND m_Instance;
 
 }; //CFND
 

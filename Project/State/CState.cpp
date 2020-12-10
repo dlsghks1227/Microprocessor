@@ -61,5 +61,15 @@ void CState::Update()
 		}
 	}
 	
+	if (m_SetAlarm == true)
+	{
+		if (m_AlarmTime == m_CurrentTime)
+		{
+			m_SetAlarm = false;
+			CBuzzer::GetInstance().On();
+			ChangeState(CAlarm::GetInstance());
+		}
+	}
+	
 	m_TimeCount++;
 }

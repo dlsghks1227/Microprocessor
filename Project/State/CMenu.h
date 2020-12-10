@@ -55,6 +55,7 @@ private:
 	char		m_MenuPrintText2[16] = { 0x00 };
 	
 	int			m_TimeCount;
+	int			m_StandingCount;
 	bool		m_Blink;
 	
 

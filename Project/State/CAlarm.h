@@ -34,7 +34,24 @@ public:
 	void OnExitState(CLCD& lcd)		override;
 
 private:
-	char		m_TimePrintText[16] = { 0x00 };
+	void Shuffle(int count);
+	void ResetButtonClick();
+
+private:
+	char		m_HelpText[24] = "Press Button in order. ";
+	int			m_TextShiftCount;
+	
+	char		m_AlarmPrintText1[16] = { 0x00 };
+	char		m_AlarmPrintText2[16] = { 0x00 };
+
+	int			m_Order[4] = {1, 2, 3, 4};
+	int			m_ShuffleTime;
+	int			m_TimeCount;
+	
+	int			m_ButtonClick[4] = {0, 0, 0, 0};
+	int			m_ButtonClickCount;
+	
+	bool		m_Blink;
 
 private:
 	static CAlarm m_Instance;

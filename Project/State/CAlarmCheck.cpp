@@ -24,20 +24,25 @@ void CAlarmCheck::Display(CLCD& lcd)
 {
 	if (m_Enable == true)
 	{
+		sprintf(m_TimePrintText1, "Cur: %02d:%02d:%02d",
+			CState::GetInstance().m_CurrentTime.GetHour(),
+			CState::GetInstance().m_CurrentTime.GetMinute(),
+			CState::GetInstance().m_CurrentTime.GetSecond());
+
 		if (CState::GetInstance().m_SetAlarm == true)
 		{
-			sprintf(m_TimePrintText, "    %02d:%02d:%02d",
+			sprintf(m_TimePrintText2, "Alm: %02d:%02d:%02d",
 				CState::GetInstance().m_AlarmTime.GetHour(),
 				CState::GetInstance().m_AlarmTime.GetMinute(),
 				CState::GetInstance().m_AlarmTime.GetSecond());
 		}
 		else
 		{
-			sprintf(m_TimePrintText, "    No Alarm");
+			sprintf(m_TimePrintText2, "    No Alarm");
 		}
 		
-		lcd.PrintLine_1("  Alarm  Check");
-		lcd.PrintLine_2(m_TimePrintText);
+		lcd.PrintLine_1(m_TimePrintText1);
+		lcd.PrintLine_2(m_TimePrintText2);
 	}
 }
 
@@ -67,7 +72,8 @@ void CAlarmCheck::OnEnterState(CLCD& lcd)
 	m_Enable = true;
 	
 	// LCD 메시지 초기화
-	memset(m_TimePrintText, ' ', sizeof(m_TimePrintText));
+	memset(m_TimePrintText1, ' ', sizeof(m_TimePrintText1));
+	memset(m_TimePrintText2, ' ', sizeof(m_TimePrintText2));
 	
 	lcd.Clear();
 }
@@ -77,7 +83,8 @@ void CAlarmCheck::OnExitState(CLCD& lcd)
 	m_Enable = false;
 	
 	// LCD 메시지 초기화
-	memset(m_TimePrintText, ' ', sizeof(m_TimePrintText));
+	memset(m_TimePrintText1, ' ', sizeof(m_TimePrintText1));
+	memset(m_TimePrintText2, ' ', sizeof(m_TimePrintText2));
 	
 	lcd.Clear();
 }

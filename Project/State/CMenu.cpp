@@ -15,6 +15,7 @@ CMenu::CMenu()
 {
 	m_MenuState = MENUSTATE::CURRENTTIME;
 	m_TimeCount = 0;
+	m_StandingCount = 0;
 	m_Blink = false;
 } //CMenu
 
@@ -64,6 +65,12 @@ void CMenu::Update()
 	{
 		m_TimeCount = 0;
 		m_Blink = !m_Blink;
+		
+		if (++m_StandingCount >= 10)
+		{
+			m_StandingCount = 0;
+			CState::GetInstance().ChangeState(CCurrentTime::GetInstance());
+		}
 	}
 	
 	m_TimeCount++;
@@ -71,6 +78,8 @@ void CMenu::Update()
 
 void CMenu::OnClickSwitch01()
 {
+	m_StandingCount = 0;
+	
 	if (m_MenuState == MENUSTATE::CURRENTTIME)
 	{
 		CState::GetInstance().ChangeState(CCurrentTime::GetInstance());
@@ -115,10 +124,13 @@ void CMenu::OnClickSwitch01()
 
 void CMenu::OnClickSwitch02()
 {
+	m_StandingCount = 0;
 }
 
 void CMenu::OnClickSwitch03()
 {
+	m_StandingCount = 0;
+	
 	memset(m_MenuPrintText1, ' ', sizeof(m_MenuPrintText1));
 	memset(m_MenuPrintText2, ' ', sizeof(m_MenuPrintText2));
 	if (--m_MenuState < MENUSTATE::CURRENTTIME) m_MenuState = MENUSTATE::CURRENTTIME;
@@ -126,6 +138,8 @@ void CMenu::OnClickSwitch03()
 
 void CMenu::OnClickSwitch04()
 {
+	m_StandingCount = 0;
+	
 	memset(m_MenuPrintText1, ' ', sizeof(m_MenuPrintText1));
 	memset(m_MenuPrintText2, ' ', sizeof(m_MenuPrintText2));
 	if (++m_MenuState > MENUSTATE::STOPWATCH) m_MenuState = MENUSTATE::STOPWATCH;
@@ -139,6 +153,9 @@ void CMenu::OnEnterState(CLCD& lcd)
 	memset(m_MenuPrintText1, ' ', sizeof(m_MenuPrintText1));
 	memset(m_MenuPrintText2, ' ', sizeof(m_MenuPrintText2));
 	
+	m_TimeCount = 0;
+	m_StandingCount = 0;
+	
 	lcd.Clear();
 }
 
@@ -149,6 +166,9 @@ void CMenu::OnExitState(CLCD& lcd)
 	// LCD 메시지 초기화
 	memset(m_MenuPrintText1, ' ', sizeof(m_MenuPrintText1));
 	memset(m_MenuPrintText2, ' ', sizeof(m_MenuPrintText2));
+	
+	m_TimeCount = 0;
+	m_StandingCount = 0;
 	
 	lcd.Clear();
 }

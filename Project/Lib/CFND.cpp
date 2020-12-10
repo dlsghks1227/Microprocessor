@@ -8,6 +8,8 @@
 
 #include "CFND.h"
 
+CFND CFND::m_Instance;
+
 // default constructor
 CFND::CFND()
 {
@@ -46,10 +48,10 @@ void CFND::DisplaySplit(int d1, int d2, int d3, int d4)
 	}
 	
 	for (int i = 0; i < 4; i++) {
-		PORTD &= 0x0F;
 		PORTC = ~FND_TABLE[number[i]];
 		PORTD |= (0x10 << i);
 		m_Delay.Delay_ms(1);
+		PORTD &= 0x0F;
 	}
 }
 

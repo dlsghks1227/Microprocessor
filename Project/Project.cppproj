@@ -278,6 +278,12 @@
     <Compile Include="State\CCurrentTime.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="State\CEnglishPrint.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="State\CEnglishPrint.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="State\CMenu.cpp">
       <SubType>compile</SubType>
     </Compile>
