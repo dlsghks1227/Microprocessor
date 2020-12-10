@@ -24,7 +24,17 @@ void CAlarmCheck::Display(CLCD& lcd)
 {
 	if (m_Enable == true)
 	{
-		sprintf(m_TimePrintText, "    %02d:%02d:%02d", CState::GetInstance().m_AlarmTime.GetHour(), CState::GetInstance().m_AlarmTime.GetMinute(),CState::GetInstance().m_AlarmTime.GetSecond());
+		if (CState::GetInstance().m_SetAlarm == true)
+		{
+			sprintf(m_TimePrintText, "    %02d:%02d:%02d",
+				CState::GetInstance().m_AlarmTime.GetHour(),
+				CState::GetInstance().m_AlarmTime.GetMinute(),
+				CState::GetInstance().m_AlarmTime.GetSecond());
+		}
+		else
+		{
+			sprintf(m_TimePrintText, "    No Alarm");
+		}
 		
 		lcd.PrintLine_1("  Alarm  Check");
 		lcd.PrintLine_2(m_TimePrintText);
@@ -37,6 +47,7 @@ void CAlarmCheck::Update()
 
 void CAlarmCheck::OnClickSwitch01()
 {
+	CState::GetInstance().ChangeState(CMenu::GetInstance());
 }
 
 void CAlarmCheck::OnClickSwitch02()

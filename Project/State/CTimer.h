@@ -37,7 +37,8 @@ public:
 	void OnExitState(CLCD& lcd)		override;
 	
 private:
-	char msg[16] = { 0x00 };
+	char m_TimerPrintText1[16] = { 0x00 };
+	char m_TimerPrintText2[16] = { 0x00 };
 	
 private:
 	static CTimer m_Instance;

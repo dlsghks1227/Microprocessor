@@ -13,6 +13,7 @@
 
 #include "../Lib/CLCD.h"
 #include "../Lib/CDelay.h"
+#include "../Lib/CBuzzer.h"
 
 #include "CStateBase.h"
 #include "CCurrentTime.h"
@@ -39,17 +40,7 @@ public:
 	{
 		m_CurrentState->Display(m_Lcd);
 	}
-	void Update()
-	{
-		m_CurrentState->Update();
-		
-		if (m_TimeCount >= 200) {
-			m_TimeCount = 0;
-			m_CurrentTime++;
-		}
-				
-		m_TimeCount++;
-	}
+	void Update();
 	
 	void OnClickSwitch01()	{ m_CurrentState->OnClickSwitch01(); }
 	void OnClickSwitch02()	{ m_CurrentState->OnClickSwitch02(); }

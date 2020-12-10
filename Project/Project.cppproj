@@ -236,6 +236,12 @@
     <Compile Include="Lib\CADC.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Lib\CBuzzer.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Lib\CBuzzer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Lib\CDelay.h">
       <SubType>compile</SubType>
     </Compile>

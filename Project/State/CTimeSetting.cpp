@@ -15,6 +15,8 @@ CTimeSetting::CTimeSetting()
 	m_TimeState = TIMESTATE::SECOND;
 	m_TimeCount = 0;
 	m_Blink = false;
+	
+	m_TimeSettingState = TIMESETTINGSTATE::CURRENT;
 }
 
 CTimeSetting::~CTimeSetting()
@@ -22,10 +24,11 @@ CTimeSetting::~CTimeSetting()
 	
 }
 
-void CTimeSetting::SetTimeSetting(const char* msg, CTime* t)
+void CTimeSetting::SetTimeSetting(const char* msg, CTime* t, TIMESETTINGSTATE state)
 {
 	strcpy(this->m_Title, msg);
 	m_pSetTime = t;
+	m_TimeSettingState = state;
 }
 
 void CTimeSetting::Display(CLCD& lcd)
@@ -76,7 +79,24 @@ void CTimeSetting::Update()
 void CTimeSetting::OnClickSwitch01()
 {
 	m_pSetTime->SetTime(m_Time);
-	CState::GetInstance().ChangeState(CMenu::GetInstance());
+	if (m_TimeSettingState == TIMESETTINGSTATE::CURRENT)
+	{
+		CState::GetInstance().ChangeState(CMenu::GetInstance());
+	}
+	else if (m_TimeSettingState == TIMESETTINGSTATE::ALARM)
+	{
+		CState::GetInstance().m_SetAlarm = true;
+		CState::GetInstance().ChangeState(CAlarmCheck::GetInstance());
+	}
+	else if (m_TimeSettingState == TIMESETTINGSTATE::TIMER)
+	{
+		CState::GetInstance().m_SetTimer = true;
+		CState::GetInstance().ChangeState(CTimer::GetInstance());
+	}
+	else
+	{
+		CState::GetInstance().ChangeState(CMenu::GetInstance());
+	}
 }
 
 void CTimeSetting::OnClickSwitch02()

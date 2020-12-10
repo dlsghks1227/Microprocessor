@@ -21,7 +21,7 @@ public:
 	~CTimeSetting();
 	
 public:
-	void SetTimeSetting(const char* msg, CTime* t);
+	void SetTimeSetting(const char* msg, CTime* t, TIMESETTINGSTATE state);
 
 public:
 	void Display(CLCD& lcd) override;
@@ -55,6 +55,8 @@ private:
 	int			m_TimeCount;
 	int			m_BlinkPos;
 	bool		m_Blink;
+	
+	TIMESETTINGSTATE m_TimeSettingState;
 		
 private:
 	static CTimeSetting m_Instance;

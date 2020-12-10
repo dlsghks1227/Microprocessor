@@ -61,6 +61,7 @@ int main(void)
 	//
 	
 	CADC::GetInstance().Init();
+	CBuzzer::GetInstance().Init();
 	
 	DDRB = 0xFF;
 	PORTB = 0xFF;

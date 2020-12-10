@@ -79,14 +79,14 @@ void CMenu::OnClickSwitch01()
 	{
 		CTimeSetting::GetInstance().SetTimeSetting(
 		"Current Time Set",
-		&CState::GetInstance().m_CurrentTime);
+		&CState::GetInstance().m_CurrentTime, TIMESETTINGSTATE::CURRENT);
 		CState::GetInstance().ChangeState(CTimeSetting::GetInstance());
 	}
 	else if (m_MenuState == MENUSTATE::ALARMSET)
 	{
 		CTimeSetting::GetInstance().SetTimeSetting(
 		"   Alarm  Set",
-		&CState::GetInstance().m_AlarmTime);
+		&CState::GetInstance().m_AlarmTime, TIMESETTINGSTATE::ALARM);
 		CState::GetInstance().ChangeState(CTimeSetting::GetInstance());
 	}
 	else if (m_MenuState == MENUSTATE::ALARMCHECK)
@@ -95,7 +95,17 @@ void CMenu::OnClickSwitch01()
 	}
 	else if (m_MenuState == MENUSTATE::TIMER)
 	{
-		CState::GetInstance().ChangeState(CTimer::GetInstance());
+		if (CState::GetInstance().m_SetTimer == true)
+		{
+			CState::GetInstance().ChangeState(CTimer::GetInstance());
+		}
+		else
+		{
+			CTimeSetting::GetInstance().SetTimeSetting(
+			"   Set  Timer",
+			&CState::GetInstance().m_TimerTime, TIMESETTINGSTATE::TIMER);
+			CState::GetInstance().ChangeState(CTimeSetting::GetInstance());
+		}
 	}
 	else if (m_MenuState == MENUSTATE::STOPWATCH)
 	{

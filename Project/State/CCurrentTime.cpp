@@ -24,7 +24,10 @@ void CCurrentTime::Display(CLCD& lcd)
 {
 	if (m_Enable == true)
 	{
-		sprintf(m_TimePrintText, "    %02d:%02d:%02d", CState::GetInstance().m_CurrentTime.GetHour(), CState::GetInstance().m_CurrentTime.GetMinute(),CState::GetInstance().m_CurrentTime.GetSecond());
+		sprintf(m_TimePrintText, "    %02d:%02d:%02d",
+			CState::GetInstance().m_CurrentTime.GetHour(),
+			CState::GetInstance().m_CurrentTime.GetMinute(),
+			CState::GetInstance().m_CurrentTime.GetSecond());
 		
 		lcd.PrintLine_1("  Current Time");
 		lcd.PrintLine_2(m_TimePrintText);

@@ -127,6 +127,13 @@ private:
 	int m_centiSecond;
 };
 
+typedef enum _TIMESETTINGSTATE
+{
+	CURRENT,
+	ALARM,
+	TIMER,
+} TIMESETTINGSTATE;
+
 class CStateBase
 {
 public:
