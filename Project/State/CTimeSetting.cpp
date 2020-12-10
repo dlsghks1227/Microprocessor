@@ -30,7 +30,8 @@ void CTimeSetting::SetTimeSetting(const char* msg, CTime* t)
 
 void CTimeSetting::Display(CLCD& lcd)
 {	
-	if (m_Enable == true) {
+	if (m_Enable == true)
+	{
 		//CState::GetInstance().SetCurrentTime(CTime(60, 10, 10));
 		sprintf(m_SetTimeText, "    %02d:%02d:%02d", m_Time.GetHour(), m_Time.GetMinute(), m_Time.GetSecond());
 		
@@ -63,7 +64,8 @@ void CTimeSetting::Update()
 		m_SetTimeText[m_BlinkPos + 1] = 0xFF;
 	}
 	
-	if (m_TimeCount >= 100) {
+	if (m_TimeCount >= 100)
+	{
 		m_TimeCount = 0;
 		m_Blink = !m_Blink;
 	}

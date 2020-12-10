@@ -27,8 +27,8 @@ void CMenu::Display(CLCD& lcd)
 {
 	if (m_Enable == true)
 	{
-		sprintf(m_MenuPrintText1, "%s", m_MenuText[(((m_MenuState) / 2) * 2)]);
-		sprintf(m_MenuPrintText2, "%s", m_MenuText[(((m_MenuState) / 2) * 2) + 1]);
+		sprintf(m_MenuPrintText1, "%s", m_MenuText[((m_MenuState / 2) * 2)]);
+		sprintf(m_MenuPrintText2, "%s", m_MenuText[((m_MenuState / 2) * 2) + 1]);
 		
 		lcd.PrintLine_1(m_MenuPrintText1);
 		lcd.PrintLine_2(m_MenuPrintText2);
@@ -48,7 +48,8 @@ void CMenu::Update()
 	
 	if (m_Blink == true)
 	{
-		if (m_MenuState % 2 == 0) {
+		if (m_MenuState % 2 == 0)
+		{
 			m_MenuPrintText1[12] = '<';
 			m_MenuPrintText1[13] = '-';
 		}
@@ -59,7 +60,8 @@ void CMenu::Update()
 		}
 	}
 	
-	if (m_TimeCount >= 100) {
+	if (m_TimeCount >= 100)
+	{
 		m_TimeCount = 0;
 		m_Blink = !m_Blink;
 	}
@@ -97,7 +99,7 @@ void CMenu::OnClickSwitch01()
 	}
 	else if (m_MenuState == MENUSTATE::STOPWATCH)
 	{
-		
+		CState::GetInstance().ChangeState(CStopwatch::GetInstance());
 	}
 }
 

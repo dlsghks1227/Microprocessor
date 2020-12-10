@@ -21,6 +21,7 @@
 #include "CAlarm.h"
 #include "CAlarmCheck.h"
 #include "CStopwatch.h"
+#include "CRecordList.h"
 #include "CMenu.h"
 
 class CState
@@ -34,10 +35,12 @@ public:
 
 	void ChangeState(CStateBase& state);
 
-	void Display()			{
+	void Display()
+	{
 		m_CurrentState->Display(m_Lcd);
 	}
-	void Update()			{
+	void Update()
+	{
 		m_CurrentState->Update();
 		
 		if (m_TimeCount >= 200) {
@@ -47,17 +50,27 @@ public:
 				
 		m_TimeCount++;
 	}
+	
 	void OnClickSwitch01()	{ m_CurrentState->OnClickSwitch01(); }
 	void OnClickSwitch02()	{ m_CurrentState->OnClickSwitch02(); }
 	void OnClickSwitch03()	{ m_CurrentState->OnClickSwitch03(); }
 	void OnClickSwitch04()	{ m_CurrentState->OnClickSwitch04(); }
 		
-	void* operator new(size_t objsize) {
+	void* operator new(size_t objsize)
+	{
 		return malloc(objsize);
 	}
 	
-	void operator delete(void* obj) {
+	void operator delete(void* obj) 
+	{
 		return free(obj);
+	}
+	
+	void ResetRecordList()
+	{
+		for (int i = 0 ; i < (int)(sizeof(m_RecordList) / sizeof(CTime)); i++) {
+			m_RecordList[i].SetTime(0, 0, 0, 0);
+		}
 	}
 	
 
@@ -76,6 +89,7 @@ public:
 	CTime			m_AlarmTime;
 	CTime			m_TimerTime;
 	CTime			m_StopwatchTime;
+	CTime			m_RecordList[10] = {};
 	
 	bool			m_SetTimer;
 	bool			m_SetAlarm;

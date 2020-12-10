@@ -278,6 +278,12 @@
     <Compile Include="State\CMenu.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="State\CRecordList.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="State\CRecordList.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="State\CState.cpp">
       <SubType>compile</SubType>
     </Compile>

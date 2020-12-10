@@ -19,8 +19,9 @@
 class CTime
 {
 public:
-	CTime() : m_hour(0), m_minute(0), m_second(0) {}
-	CTime(int _hour, int _minute, int _second) : m_hour(_hour % 24), m_minute(_minute % 60), m_second(_second % 60) {}
+	CTime() : m_hour(0), m_minute(0), m_second(0), m_centiSecond(0) {}
+	CTime(int _hour, int _minute, int _second) : m_hour(_hour % 24), m_minute(_minute % 60), m_second(_second % 60), m_centiSecond(0) {}
+	CTime(int _hour, int _minute, int _second, int _cs) : m_hour(_hour % 24), m_minute(_minute % 60), m_second(_second % 60), m_centiSecond(_cs % 100) {}
 	~CTime() {}
 	
 public:
@@ -30,19 +31,29 @@ public:
 		m_minute = _minute % 60;
 		m_second = _second % 60;
 	}
+	void SetTime(int _hour, int _minute, int _second, int _cs)
+	{
+		m_hour = _hour % 24;
+		m_minute = _minute % 60;
+		m_second = _second % 60;
+		m_centiSecond = _cs % 100;
+	}
 	void SetTime(CTime t)
 	{
-		SetTime(t.m_hour, t.m_minute, t.m_second);
+		SetTime(t.m_hour, t.m_minute, t.m_second, t.m_centiSecond);
 	}
 	
-	void	SetHour(int value)		{ m_hour = value; }
-	int		GetHour()				{ return m_hour; }
+	void	SetHour(int value)			{ m_hour = value; }
+	int		GetHour()					{ return m_hour % 24; }
 	
-	void	SetMinute(int value)	{ m_minute = value; }
-	int		GetMinute()				{ return m_minute; }
+	void	SetMinute(int value)		{ m_minute = value; }
+	int		GetMinute()					{ return m_minute % 60; }
 	
-	void	SetSecond(int value)	{ m_second = value; }
-	int		GetSecond()				{ return m_second; }
+	void	SetSecond(int value)		{ m_second = value; }
+	int		GetSecond()					{ return m_second % 60; }
+	
+	void	SetCentiSecond(int value)	{ m_centiSecond = value; }
+	int		GetCentiSecond()			{ return m_centiSecond % 100; }
 		
 public:
 	bool	operator==(const CTime& ref) const
@@ -113,6 +124,7 @@ private:
 	int m_hour;
 	int m_minute;
 	int m_second;
+	int m_centiSecond;
 };
 
 class CStateBase
