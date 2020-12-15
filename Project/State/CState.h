@@ -67,7 +67,6 @@ public:
 		}
 	}
 	
-
 private:
 	static CState	m_Instance;
 	CStateBase*		m_CurrentState;

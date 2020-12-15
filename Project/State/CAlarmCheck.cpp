@@ -57,6 +57,9 @@ void CAlarmCheck::OnClickSwitch01()
 
 void CAlarmCheck::OnClickSwitch02()
 {
+	CState::GetInstance().m_SetAlarm = false;
+	CState::GetInstance().m_AlarmTime.SetTime(0, 0, 0, 0);
+	CState::GetInstance().ChangeState(CMenu::GetInstance());
 }
 
 void CAlarmCheck::OnClickSwitch03()

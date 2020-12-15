@@ -66,7 +66,7 @@ void CMenu::Update()
 		m_TimeCount = 0;
 		m_Blink = !m_Blink;
 		
-		if (++m_StandingCount >= 10)
+		if (++m_StandingCount >= 60)
 		{
 			m_StandingCount = 0;
 			CState::GetInstance().ChangeState(CCurrentTime::GetInstance());
